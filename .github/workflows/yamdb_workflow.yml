@@ -46,10 +46,10 @@ jobs:
         with:
           context: ./api_yamdb
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/infra_yam:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/yamdb_final
           file: ./api_yamdb/Dockerfile
-          cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/infra_yam:buildcache,mode=max
-          cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/infra_yam:buildcache
+          cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/yamdb_final:buildcache,mode=max
+          cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/yamdb_final:buildcache
 
   deploy:
     runs-on: ubuntu-latest
