@@ -1,18 +1,10 @@
-import os
 import csv
+import os
 
-from django.conf import settings
 from django.core.management import BaseCommand
+from django.conf import settings
 
 from reviews.models import User
-
-
-# ALREDY_LOADED_ERROR_MESSAGE = """
-# База данных уже существует.
-# Если хотите перезаписать её из CSV файла,
-# сначала удалите db.sqlite3 из директории и
-# заново выполните миграции `python manage.py migrate`
-# """
 
 
 class Command(BaseCommand):
@@ -22,10 +14,9 @@ class Command(BaseCommand):
         file_path = os.path.join(settings.BASE_DIR, 'static/data',
                                  'users.csv')
 
-
-#        if User.objects.exists():
-#            print(ALREDY_LOADED_ERROR_MESSAGE)
-#            return
+        #        if User.objects.exists():
+        #            print(ALREDY_LOADED_ERROR_MESSAGE)
+        #            return
 
         User.objects.all().delete()
 

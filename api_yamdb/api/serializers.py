@@ -1,8 +1,8 @@
-from django.utils.timezone import now
-
 from django.shortcuts import get_object_or_404
-from rest_framework import serializers
+from django.utils.timezone import now
 from django.core.validators import MaxValueValidator, MinValueValidator
+
+from rest_framework import serializers
 
 from reviews.models import (Title, Category, User, Review, Comment, Genre)
 
@@ -98,7 +98,6 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = User
         fields = (
@@ -112,7 +111,6 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class SignUpSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = User
         fields = ('username', 'email')

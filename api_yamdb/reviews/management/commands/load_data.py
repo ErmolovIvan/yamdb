@@ -1,10 +1,10 @@
 import csv
 
-from django.conf import settings
 from django.core.management import BaseCommand
+from django.conf import settings
 
 from reviews.models import (
-    TitleGenre, Title, Genre, User, Category, TitleGenre, Review, Comment
+    Title, Genre, User, Category, TitleGenre, Review, Comment
 )
 
 IMPORT_ORDER = {
@@ -24,17 +24,17 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         for model, file_path in IMPORT_ORDER.items():
             with open(
-                f'{settings.BASE_DIR}/static/data/{file_path}',
-                'r',
-                encoding='utf-8'
+                    f'{settings.BASE_DIR}/static/data/{file_path}',
+                    'r',
+                    encoding='utf-8'
             ) as f:
                 reader = csv.DictReader(f)
                 model.objects.bulk_create(model(**objs) for objs in reader)
                 if model == TitleGenre:
                     with open(
-                        f'{settings.BASE_DIR}/static/data/{file_path}',
-                        'r',
-                        encoding='utf-8'
+                            f'{settings.BASE_DIR}/static/data/{file_path}',
+                            'r',
+                            encoding='utf-8'
                     ) as f1:
                         reader = csv.reader(f1)
                         for row in reader:

@@ -1,11 +1,10 @@
 from django.contrib.auth.models import AbstractUser
-from django.db import models
 from django.core.validators import (
     MaxValueValidator, MinValueValidator
 )
+from django.db import models
 
 from api.validators import validate_max_year
-
 
 TEXTFIELD_LIMIT = 20
 
