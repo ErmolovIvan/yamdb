@@ -46,7 +46,7 @@ jobs:
         with:
           context: ./api_yamdb
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/yamdb_final:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/yamdb_final:v1.0
           file: ./api_yamdb/Dockerfile
           cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/yamdb_final:buildcache,mode=max
           cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/yamdb_final:buildcache
@@ -65,7 +65,7 @@ jobs:
           script: |
             sudo docker-compose stop
             sudo docker-compose rm web
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/yamdb_final
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/yamdb_final:v1.0
             touch .env
             echo DB_ENGINE=${{ secrets.DB_ENGINE }} >> .env
             echo DB_NAME=${{ secrets.DB_NAME }} >> .env
