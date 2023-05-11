@@ -65,6 +65,7 @@ jobs:
           script: |
             sudo docker-compose stop
             sudo docker-compose rm web
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/yamdb_final:latest
             rm .env
             touch .env
             
@@ -75,11 +76,6 @@ jobs:
             echo DB_HOST=${{ secrets.DB_HOST }} >> .env
             echo DB_PORT=${{ secrets.DB_PORT }} >> .env
             echo DEFAULT_FROM_EMAIL=${{ secrets.DEFAULT_FROM_EMAIL }} >> .env
-            
-            docker-compose -f docker-compose.yaml stop web nginx
-            docker-compose -f docker-compose.yaml rm --force web nginx
-            
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/yamdb_final:latest
             
             sudo docker-compose up -d
             sudo docker compose exec yamdb python manage.py migrate
