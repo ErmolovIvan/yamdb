@@ -15,7 +15,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    '130.193.41.170',
+    '84.252.141.240',
     'kirillnepridumal.ddns.net',
     'web'
 ]

@@ -1,4 +1,3 @@
-
 name: Django-app YamDB workflow
 
 on: [push]
@@ -24,10 +23,12 @@ jobs:
       run: |
         python -m flake8
         python -m pytest
+
   build_and_push_app_to_docker_hub:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     needs: tests
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
@@ -46,7 +47,7 @@ jobs:
         with:
           context: ./api_yamdb
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/yamdb_final:v1.0
+          tags: ${{ secrets.DOCKER_USERNAME }}/yamdb_final:latest
           file: ./api_yamdb/Dockerfile
 
   deploy:
@@ -64,15 +65,22 @@ jobs:
           script: |
             sudo docker-compose stop
             sudo docker-compose rm web
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/yamdb_final:latest
+            rm .env
             touch .env
+            
             echo DB_ENGINE=${{ secrets.DB_ENGINE }} >> .env
             echo DB_NAME=${{ secrets.DB_NAME }} >> .env
             echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> .env
             echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
             echo DB_HOST=${{ secrets.DB_HOST }} >> .env
             echo DB_PORT=${{ secrets.DB_PORT }} >> .env
+            echo DEFAULT_FROM_EMAIL=${{ secrets.DEFAULT_FROM_EMAIL }} >> .env
+            
             sudo docker-compose up -d
+            sudo docker compose exec yamdb python manage.py migrate
             sudo docker-compose exec -T web python manage.py collectstatic --noinput
+            
 
   send_message:
     runs-on: ubuntu-latest
