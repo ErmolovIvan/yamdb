@@ -78,7 +78,7 @@ jobs:
             echo DEFAULT_FROM_EMAIL=${{ secrets.DEFAULT_FROM_EMAIL }} >> .env
             
             sudo docker-compose up -d
-            sudo docker compose exec yamdb python manage.py migrate
+            sudo docker compose exec yamdb python manage.py migrate review
             sudo docker-compose exec -T web python manage.py collectstatic --noinput
             
 
