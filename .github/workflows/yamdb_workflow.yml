@@ -63,9 +63,9 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/yamdb_final:latest
             sudo docker-compose stop
             sudo docker-compose rm web
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/yamdb_final:latest
             rm .env
             touch .env
             
@@ -92,4 +92,3 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: ${{ github.workflow }} успешно выполнен!//github.com/${{ github.repository }}/commit/${{github.sha}}
-        
