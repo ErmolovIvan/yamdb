@@ -77,9 +77,11 @@ jobs:
             echo DB_PORT=${{ secrets.DB_PORT }} >> .env
             echo DEFAULT_FROM_EMAIL=${{ secrets.DEFAULT_FROM_EMAIL }} >> .env
             
-            sudo docker-compose up -d
-            sudo docker compose exec yamdb python manage.py migrate review
-            sudo docker-compose exec -T web python manage.py collectstatic --noinput
+            docker-compose -f docker-compose.yaml up -d
+            
+            docker exec \
+              -t $(docker-compose -f docker-compose.yaml ps -q web) \
+              sh -c 'python3 manage.py collectstatic --no-input'
             
 
   send_message:
