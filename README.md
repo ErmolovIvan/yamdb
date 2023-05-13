@@ -1,6 +1,8 @@
 # Проект YaMDB
 ![Github actions](https://github.com/ErmolovIvan/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
 
+Ссылка - 158.160.12.11
+
 Проект YaMDb собирает отзывы пользователей на произведения. Сами произведения в YaMDb не хранятся, здесь нельзя посмотреть фильм или послушать музыку.
 ## Авторы
 Проект создан: 
