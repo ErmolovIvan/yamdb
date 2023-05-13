@@ -30,13 +30,13 @@
 Клонировать репозиторий:
 
 ```
-git clone https://github.com/ErmolovIvan/infra_sp2.git
+git clone https://github.com/ErmolovIvan/yamdb_final.git
 ```
 
 Перейти в папку infra и запустить docker-compose.yaml
 (при установленном и запущенном Docker)
 ```
-cd infra_sp2/infra
+cd yamdb_final/infra
 docker-compose up
 ```
 
@@ -79,7 +79,7 @@ http://158.160.12.11/redoc/
 ### POST-запрос
 
 ```
-http://127.0.0.1:8000/api/v1/auth/signup/
+http://158.160.12.11/api/v1/auth/signup/
 ```
 ```
 {
@@ -90,7 +90,7 @@ http://127.0.0.1:8000/api/v1/auth/signup/
 
 ### GET-запрос
 ```
-http://127.0.0.1:8000/api/v1/categories/
+http://158.160.12.11/api/v1/categories/
 ```
 ```
 {
@@ -101,12 +101,12 @@ http://127.0.0.1:8000/api/v1/categories/
 
 ### DEL-запросы
 ```
-http://127.0.0.1:8000/api/v1/categories/{slug}/
+http://158.160.12.11/api/v1/categories/{slug}/
 ```
 
 ### PATCH-запросы
 ```
-http://127.0.0.1:8000/api/v1/titles/{titles_id}/
+http://158.160.12.11/api/v1/titles/{titles_id}/
 ```
 
 ```
